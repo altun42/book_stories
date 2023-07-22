@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:book_store/src/common_wigets/login_button.dart';
 import 'package:book_store/src/features/authentication/presentation/pages/login_page.dart';
 import 'package:book_store/src/features/authentication/presentation/login_text_field.dart';
+import 'package:book_store/src/features/authentication/presentation/riverpod/register_riverpod.dart';
 import 'package:book_store/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
@@ -18,6 +19,9 @@ class RegisterPage extends HookConsumerWidget {
     final nameController = useTextEditingController(text: '');
     final emailController = useTextEditingController(text: '');
     final passwordController = useTextEditingController(text: '');
+        final state = ref.watch(registerProvider);
+        
+
 
     return Scaffold(
       resizeToAvoidBottomInset: true,

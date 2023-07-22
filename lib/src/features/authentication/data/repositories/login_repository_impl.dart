@@ -1,6 +1,7 @@
 import 'package:book_store/src/features/authentication/data/model/loginModel/login_model.dart';
 import 'package:book_store/src/features/authentication/domain/repositories/user_login_repository.dart';
 import 'package:dio/dio.dart';
+// ignore: implementation_imports
 import 'package:fpdart/src/either.dart';
 
 class LoginRepositoryImpl implements UserLoginRepository {
@@ -18,7 +19,7 @@ class LoginRepositoryImpl implements UserLoginRepository {
         );
         return right(person);
       } else {
-        return left('Kayıt başarısız');
+        return left('Giriş başarısız');
       }
     } catch (e) {
       return left('Hata oluştu: $e');
