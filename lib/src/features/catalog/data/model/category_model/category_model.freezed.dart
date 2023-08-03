@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'product_model.dart';
+part of 'category_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,33 +14,36 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Product _$ProductFromJson(Map<String, dynamic> json) {
-  return _Product.fromJson(json);
+Category _$CategoryFromJson(Map<String, dynamic> json) {
+  return _Category.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Product {
+mixin _$Category {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  DateTime get created_at => throw _privateConstructorUsedError;
+  String get created_at => throw _privateConstructorUsedError;
+  List<Product>? get productList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ProductCopyWith<Product> get copyWith => throw _privateConstructorUsedError;
+  $CategoryCopyWith<Category> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ProductCopyWith<$Res> {
-  factory $ProductCopyWith(Product value, $Res Function(Product) then) =
-      _$ProductCopyWithImpl<$Res, Product>;
+abstract class $CategoryCopyWith<$Res> {
+  factory $CategoryCopyWith(Category value, $Res Function(Category) then) =
+      _$CategoryCopyWithImpl<$Res, Category>;
   @useResult
-  $Res call({int id, String name, DateTime created_at});
+  $Res call(
+      {int id, String name, String created_at, List<Product>? productList});
 }
 
 /// @nodoc
-class _$ProductCopyWithImpl<$Res, $Val extends Product>
-    implements $ProductCopyWith<$Res> {
-  _$ProductCopyWithImpl(this._value, this._then);
+class _$CategoryCopyWithImpl<$Res, $Val extends Category>
+    implements $CategoryCopyWith<$Res> {
+  _$CategoryCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -53,6 +56,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? id = null,
     Object? name = null,
     Object? created_at = null,
+    Object? productList = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -66,26 +70,32 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
       created_at: null == created_at
           ? _value.created_at
           : created_at // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
+      productList: freezed == productList
+          ? _value.productList
+          : productList // ignore: cast_nullable_to_non_nullable
+              as List<Product>?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
-  factory _$$_ProductCopyWith(
-          _$_Product value, $Res Function(_$_Product) then) =
-      __$$_ProductCopyWithImpl<$Res>;
+abstract class _$$_CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res> {
+  factory _$$_CategoryCopyWith(
+          _$_Category value, $Res Function(_$_Category) then) =
+      __$$_CategoryCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, DateTime created_at});
+  $Res call(
+      {int id, String name, String created_at, List<Product>? productList});
 }
 
 /// @nodoc
-class __$$_ProductCopyWithImpl<$Res>
-    extends _$ProductCopyWithImpl<$Res, _$_Product>
-    implements _$$_ProductCopyWith<$Res> {
-  __$$_ProductCopyWithImpl(_$_Product _value, $Res Function(_$_Product) _then)
+class __$$_CategoryCopyWithImpl<$Res>
+    extends _$CategoryCopyWithImpl<$Res, _$_Category>
+    implements _$$_CategoryCopyWith<$Res> {
+  __$$_CategoryCopyWithImpl(
+      _$_Category _value, $Res Function(_$_Category) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,8 +104,9 @@ class __$$_ProductCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? created_at = null,
+    Object? productList = freezed,
   }) {
-    return _then(_$_Product(
+    return _then(_$_Category(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -107,76 +118,100 @@ class __$$_ProductCopyWithImpl<$Res>
       created_at: null == created_at
           ? _value.created_at
           : created_at // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
+      productList: freezed == productList
+          ? _value._productList
+          : productList // ignore: cast_nullable_to_non_nullable
+              as List<Product>?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Product implements _Product {
-  _$_Product({required this.id, required this.name, required this.created_at});
+class _$_Category implements _Category {
+  _$_Category(
+      {required this.id,
+      required this.name,
+      required this.created_at,
+      required final List<Product>? productList})
+      : _productList = productList;
 
-  factory _$_Product.fromJson(Map<String, dynamic> json) =>
-      _$$_ProductFromJson(json);
+  factory _$_Category.fromJson(Map<String, dynamic> json) =>
+      _$$_CategoryFromJson(json);
 
   @override
   final int id;
   @override
   final String name;
   @override
-  final DateTime created_at;
+  final String created_at;
+  final List<Product>? _productList;
+  @override
+  List<Product>? get productList {
+    final value = _productList;
+    if (value == null) return null;
+    if (_productList is EqualUnmodifiableListView) return _productList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'Product(id: $id, name: $name, created_at: $created_at)';
+    return 'Category(id: $id, name: $name, created_at: $created_at, productList: $productList)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Product &&
+            other is _$_Category &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.created_at, created_at) ||
-                other.created_at == created_at));
+                other.created_at == created_at) &&
+            const DeepCollectionEquality()
+                .equals(other._productList, _productList));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, created_at);
+  int get hashCode => Object.hash(runtimeType, id, name, created_at,
+      const DeepCollectionEquality().hash(_productList));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductCopyWith<_$_Product> get copyWith =>
-      __$$_ProductCopyWithImpl<_$_Product>(this, _$identity);
+  _$$_CategoryCopyWith<_$_Category> get copyWith =>
+      __$$_CategoryCopyWithImpl<_$_Category>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProductToJson(
+    return _$$_CategoryToJson(
       this,
     );
   }
 }
 
-abstract class _Product implements Product {
-  factory _Product(
+abstract class _Category implements Category {
+  factory _Category(
       {required final int id,
       required final String name,
-      required final DateTime created_at}) = _$_Product;
+      required final String created_at,
+      required final List<Product>? productList}) = _$_Category;
 
-  factory _Product.fromJson(Map<String, dynamic> json) = _$_Product.fromJson;
+  factory _Category.fromJson(Map<String, dynamic> json) = _$_Category.fromJson;
 
   @override
   int get id;
   @override
   String get name;
   @override
-  DateTime get created_at;
+  String get created_at;
+  @override
+  List<Product>? get productList;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductCopyWith<_$_Product> get copyWith =>
+  _$$_CategoryCopyWith<_$_Category> get copyWith =>
       throw _privateConstructorUsedError;
 }

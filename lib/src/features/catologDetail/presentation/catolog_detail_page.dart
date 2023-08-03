@@ -1,14 +1,20 @@
-import 'package:auto_route/annotations.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
-import 'package:book_store/src/common_wigets/search_field.dart';
-import 'package:book_store/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'package:book_store/src/common_wigets/search_field.dart';
+import 'package:book_store/src/features/catalog/data/model/category_model/category_model.dart';
+import 'package:book_store/src/routing/app_router.dart';
+
 @RoutePage()
 class CatologDetailPage extends StatefulWidget {
-  const CatologDetailPage({super.key});
+  Category category;
+   CatologDetailPage({
+    Key? key,
+    required this.category,
+  }) : super(key: key);
 
   @override
   State<CatologDetailPage> createState() => _CatologDetailPageState();
@@ -23,7 +29,7 @@ class _CatologDetailPageState extends State<CatologDetailPage> {
           Padding(
             padding: EdgeInsets.only(right: 20.w),
             child: Text(
-              "Best Seller",
+              widget.category.name,
               style: TextStyle(color: const Color(0xff090937), fontSize: 20.sp, fontWeight: FontWeight.w700, fontFamily: 'Manrope'),
             ),
           )
@@ -42,13 +48,16 @@ class _CatologDetailPageState extends State<CatologDetailPage> {
                 width: MediaQuery.of(context).size.width - 40.w,
                 height: 539.h,
                 child: GridView.builder(
-                  itemCount: 5,
+                  itemCount: widget.category.productList?.length??0,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2, crossAxisSpacing: 10.w, mainAxisSpacing: 10.h, childAspectRatio: 0.6),
                   itemBuilder: (context, index) {
+                    final product=  widget.category.productList?[index];
+                    
+
                     return Bounceable(
                       onTap: () {
-                        context.pushRoute(const ProductDetailRoute());
+                        context.pushRoute( ProductDetailRoute(product:product!));
                       },
                       child: Container(
                         height: 284.h,
@@ -66,14 +75,14 @@ class _CatologDetailPageState extends State<CatologDetailPage> {
                                 width: 170.w,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(4.sp),
-                                    image: const DecorationImage(image: AssetImage('assets/images/Picture.png'), fit: BoxFit.fill)),
+                                    image:  DecorationImage(image: NetworkImage(product?.cover??" "), fit: BoxFit.fill)),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: 15.0.w),
                                 child: Text(
-                                  "Dune",
+                                  product?.name??" ",
                                   style:
-                                      TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w600, fontFamily: 'Manrope', color: const Color(0xff090937)),
+                                      TextStyle(fontSize: 8.sp, fontWeight: FontWeight.w600, fontFamily: 'Manrope', color: const Color(0xff090937)),
                                 ),
                               ),
                               Padding(
@@ -82,17 +91,17 @@ class _CatologDetailPageState extends State<CatologDetailPage> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Frank Herbert",
+                                     product?.author??" ",
                                       style: TextStyle(
-                                          fontSize: 8.sp,
+                                          fontSize: 6.sp,
                                           fontWeight: FontWeight.w600,
                                           fontFamily: 'Manrope',
                                           color: const Color.fromRGBO(9, 9, 55, 0.60)),
                                     ),
                                     Text(
-                                      "87,75 \$",
+                                      "${product?.price??" "} \$",
                                       style: TextStyle(
-                                          fontSize: 12.sp, fontWeight: FontWeight.w700, fontFamily: 'Manrope', color: const Color(0xff6251DD)),
+                                          fontSize: 10.sp, fontWeight: FontWeight.w700, fontFamily: 'Manrope', color: const Color(0xff6251DD)),
                                     )
                                   ],
                                 ),

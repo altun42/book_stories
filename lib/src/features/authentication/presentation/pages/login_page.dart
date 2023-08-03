@@ -89,12 +89,13 @@ class LoginPage extends HookConsumerWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 25.h),
                 child: LoginButton(
                   onTap: () async {
-                    await ref.read(loginProvider.notifier).login();
-                    ref
-                        .read(loginProvider)
-                        .loginResult
-                        .toNullable()!
-                        .fold((failure) => print('Girişte sorun var'), (success) => context.pushRoute(HomeRoute()));
+                    context.pushRoute(CatalogRoute());
+                    // await ref.read(loginProvider.notifier).login();
+                    // ref
+                    //     .read(loginProvider)
+                    //     .loginResult
+                    //     .toNullable()!
+                    //     .fold((failure) => print('Girişte sorun var'), (success) => context.pushRoute(HomeRoute()));
                   },
                   text: Text(
                     "Login",

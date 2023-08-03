@@ -1,4 +1,3 @@
-import 'package:book_store/src/features/authentication/data/model/registerModel/register_model.dart';
 import 'package:book_store/src/features/authentication/domain/repositories/user_register_repository.dart';
 import 'package:book_store/src/features/authentication/presentation/states/register/register_state.dart';
 import 'package:get_it/get_it.dart';
@@ -17,7 +16,7 @@ class UserRegisterProvider extends AutoDisposeNotifier<RegisterState>{
     required String email,
     required String password
   })async{
-  final userRegisterRepository = getIt<UserRegisterRepository>();
+  final userRegisterRepository = getIt<RegisterRepository>();
 
     final response = await userRegisterRepository.register(
       email: email,
@@ -26,12 +25,14 @@ class UserRegisterProvider extends AutoDisposeNotifier<RegisterState>{
       
       
      );
+     response.fold((l) => state=state.copyWith(isLoading: true), (r) => state=state.copyWith(isLoading: false));
+
 
   }
   
   @override
   RegisterState build() {
-    throw UnimplementedError();
+    return RegisterState.initial();
   }
 
 }

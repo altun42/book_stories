@@ -20,6 +20,7 @@ class RegisterPage extends HookConsumerWidget {
     final emailController = useTextEditingController(text: '');
     final passwordController = useTextEditingController(text: '');
         final state = ref.watch(registerProvider);
+        final provider = ref.watch(registerProvider.notifier);
         
 
 
@@ -90,7 +91,14 @@ class RegisterPage extends HookConsumerWidget {
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 25.h),
               child: Consumer(builder: (context, ref, child) {
                 return LoginButton(
-                  onTap: () async {},
+                  onTap: () async {
+                    await provider.userRegister(
+                      name: nameController.value.text, 
+                      email: emailController.value.text, 
+                      password: passwordController.value.text);
+                      
+
+                  },
                   text: Text(
                     'Register',
                     style: TextStyle(color: Colors.white, fontSize: 16.sp, fontWeight: FontWeight.w600, fontFamily: "Manrope"),

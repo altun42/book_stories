@@ -3,8 +3,9 @@ import 'package:book_store/src/features/authentication/domain/repositories/user_
 import 'package:dio/dio.dart';
 // ignore: implementation_imports
 import 'package:fpdart/src/either.dart';
-
-class LoginRepositoryImpl implements UserLoginRepository {
+import 'package:injectable/injectable.dart';
+@Injectable(as:LoginRepository)
+class LoginRepositoryImpl implements LoginRepository {
   final Dio _dio;
   LoginRepositoryImpl(this._dio);
   @override

@@ -2,11 +2,13 @@ import 'package:book_store/src/features/authentication/data/model/registerModel/
 import 'package:book_store/src/features/authentication/domain/repositories/user_register_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:fpdart/src/either.dart';
-import 'package:fpdart/src/unit.dart';
+import 'package:injectable/injectable.dart';
 
-class UserRegisterRepositoryImpl implements UserRegisterRepository{
+
+@Injectable(as:RegisterRepository)
+class RegisterRepositoryImpl implements RegisterRepository{
   final Dio _dio;
-  UserRegisterRepositoryImpl(this._dio);
+ RegisterRepositoryImpl(this._dio);
   @override
   Future<Either<String, RegisterModel>> register({required String email, required String password,required String name}) async {
      try {

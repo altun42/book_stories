@@ -1,19 +1,26 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/annotations.dart';
-import 'package:book_store/src/common_wigets/login_button.dart';
+import 'package:book_store/src/features/catalog/data/model/product_model.dart/product_model.dart';
+import 'package:book_store/src/features/productDetail/presentation/provider/product_detail_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'package:book_store/src/common_wigets/login_button.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 @RoutePage()
-class ProductDetailPage extends StatefulWidget {
-  const ProductDetailPage({super.key});
+class ProductDetailPage extends ConsumerWidget {
+  Product product;
+  ProductDetailPage({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
 
   @override
-  State<ProductDetailPage> createState() => _ProductDetailPageState();
-}
+  Widget build(BuildContext context,WidgetRef ref) {
+        final state = ref.watch(productDetailProvider);
 
-class _ProductDetailPageState extends State<ProductDetailPage> {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -40,38 +47,44 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.asset(
-                          'assets/images/Picture.png',
+                        Image.network(
+                          product.cover,
                           width: 150.w,
                           height: 225.h,
                         ),
                         SizedBox(
                           width: 56.w,
                         ),
-                        Container(
-                            height: 44.h,
-                            width: 44.w,
-                            decoration: BoxDecoration(
-                              color: const Color(0xffF4F4FF),
-                              borderRadius: BorderRadius.circular(35.sp),
-                            ),
-                            child: const Center(
-                                child: Icon(
-                              Icons.favorite_border_outlined,
-                              color: Color(0xff6251DD),
-                            )))
+                        Bounceable(
+                          onTap: () {
+                            ref.read(productDetailProvider.notifier).likeControl();
+                            
+                          },
+                          child: Container(
+                              height: 44.h,
+                              width: 44.w,
+                              decoration: BoxDecoration(
+                                color: const Color(0xffF4F4FF),
+                                borderRadius: BorderRadius.circular(35.sp),
+                              ),
+                              child:  Center(
+                                  child: Icon(
+                              state.isLike==false?  Icons.favorite_border_outlined:Icons.favorite,
+                                color: Color(0xff6251DD),
+                              ))),
+                        )
                       ],
                     ),
                   ),
                   Text(
-                    "Dune",
+                    product.name,
                     style: TextStyle(color: const Color(0xff090937), fontSize: 20.sp, fontWeight: FontWeight.w700, fontFamily: 'Manrope'),
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
                   Text(
-                    "Frank Herbert",
+                   product.author,
                     style:
                         TextStyle(color: const Color.fromRGBO(9, 9, 55, 0.60), fontSize: 16.sp, fontWeight: FontWeight.w600, fontFamily: 'Manrope'),
                   ),
@@ -93,7 +106,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       height: 10.h,
                     ),
                     Text(
-                      'Dune is set in the distant future amidst a feudal interstellar society in which various noble houses control planetary fiefs. It tells the story of young Paul Atreides, whose family accepts the stewardship of the planet Arrakis. While the planet is an inhospitable and sparsely populated desert wasteland, it is the only source of melange, or "spice", a drug that...',
+                      product.description,
                       style: TextStyle(
                         height: 1.5.h,
                         fontSize: 16.sp,
@@ -119,7 +132,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "87,75 \$",
+                            "${product.price} \$",
                             style: TextStyle(color: Colors.white, fontSize: 16.sp, fontWeight: FontWeight.w600, fontFamily: "Manrope"),
                           ),
                           Text(
